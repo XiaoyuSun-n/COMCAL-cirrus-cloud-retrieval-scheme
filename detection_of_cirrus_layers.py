@@ -101,72 +101,19 @@ def findzbandzt (WCT,z):
         zt=999 
     return zb,zt
 
-# WCT=WCT[0,:]
-# z=z_[:]
-
-# startheightmax=1
-# startheightmin=0
-# endheight=np.where(z<18000)[0][-1]
-# zmax=np.where(WCT==np.max(WCT[startheightmax:endheight]))[0]
-# zmin=np.where(WCT==np.min(WCT[startheightmin:endheight]))[0]
-# # zt=find_nearest(WCT[zmax[0]:endheight],Ws)+zmax[0]
-# # zb=find_nearest(WCT[startheight:zmin[0]],-1*Ws)+startheight
-# WCT_rangeup=np.sort(WCT[zmax[0]:endheight])
-# WCT_rangedown=np.sort(WCT[startheightmin:zmin[0]])
-
-# Wsmax=np.max(WCT[startheightmax:endheight])
-# Wsmin=np.min(WCT[startheightmax:endheight])
-
-# Ws1=np.max(WCT[startheightmax:endheight])-Wsmax/6.0
-    
-#     # Ws2=WCT[zmin]+10.0
-# Ws2=np.min(WCT[startheightmin:endheight])+Wsmin/-2.0
-# try:
-#     zt_temp=find_closet_ele(WCT_rangeup, Ws1, 4)
-#     zb_temp=find_closet_ele(WCT_rangedown,Ws2, 4)
-#     ztidx_temp=np.empty(4,dtype=int)
-#     zbidx_temp=np.empty(4,dtype=int)
-#     for i in range(4):
-#         if zt_temp[i] !=np.inf:
-#             ztidx_temp[i]=np.where(WCT==zt_temp[i])[0][0]
-#         else:
-#             ztidx_temp[i]=999
-#         if zb_temp[i] !=np.inf:
-#             zbidx_temp[i]=np.where(WCT==zb_temp[i])[0][0]
-#         else:
-#             zbidx_temp[i]=999
-#     zt=np.max(ztidx_temp) 
-#     # if np.sum(zbidx_temp==1)>=0:
-#     #     zb=np.sort(zbidx_temp)[-2]
-#     # else:
-#     #     zb=np.min(zbidx_temp)
-#     zb=np.min(zbidx_temp)
-# except:
-#     zt=999
-#     zb=999
-# if zt>=endheight:
-#     zt=999
-# if zb<=startheightmax:
-#     zb=999
-# if zb>=zt:
-#     zb=999
-#     zt=999
-
-
-
 def find_closet_ele(lst, target, k):
     closet_ele_lst = []
-    closest_index = find_closest_index(lst, target)   # 距离target最近的元素的位置
+    closest_index = find_closest_index(lst, target)  
     closet_ele_lst.append(lst[closest_index])
 
     ele_count = 1
     left_index = closest_index - 1
     right_index = closest_index + 1
-    # 借鉴归并排序思路,向两侧滑动遍历
+
     while ele_count < k:
         left_ele = get_ele(lst, left_index)
         right_ele = get_ele(lst, right_index)
-        # 哪边元素距离target更近,哪边就走一步
+
         if target - left_ele <= right_ele - target:
             closet_ele_lst.append(left_ele)
             left_index -= 1
@@ -180,14 +127,14 @@ def find_closet_ele(lst, target, k):
 
 
 def get_ele(lst, index):
-    # 索引超出范围的,返回无穷大
+
     if index < 0 or index >= len(lst):
         return float("inf")
     return lst[index]
 
 def find_closest_index(lst, target):
     """
-    寻找距离target最近的位置
+
     :param lst:
     :param target:
     :return:
@@ -205,8 +152,6 @@ def find_closest_index(lst, target):
 
 def find_eg_index(lst, start, end, target):
     """
-    找到第一个大于等于target的元素的位置, 如果lst中最大的元素小于target
-    则返回len(lst)
     :param lst:
     :param start:
     :param end:
@@ -242,8 +187,6 @@ for i in range(timesize):
 
 #tindex=np.where((hourtime>=11)&(hourtime<=21) )
 tindex=np.where((hourtime>=0)&(hourtime<=24) )[0]
-# tindex=tindex[:-4]
-# tindex=np.where((hourtime<=24))
 
 hourtime=hourtime[tindex]
 minutetime=minutetime[tindex]
@@ -289,11 +232,6 @@ plt.contourf(time,z_[:],BSR532tot[:,:].T,cmap=cmap,levels=50,vmin=1,vmax=40)
 plt.colorbar()
 
 
-# plt.figure()
-# plt.plot(BetaAer532S[35,:]/(BetaAer532tot[35,:]-BetaAer532S[35,:]))
-
-# plt.figure()
-# plt.plot(BetaAer355tot[35,:]/(BetaAer532tot[35,:]))
 
 a=1000
 
@@ -340,14 +278,6 @@ plt.ylabel('WCT value')
 # fig.savefig('D://Lidar//plot//WCT221206BSR.png', dpi=300, bbox_inches='tight')
 
 
-# plt.figure()
-# Ws=150
-# plt.plot(z_,WCT[108,:])
-# plt.scatter(z_[zbori[108]],-Ws+50)
-# plt.scatter(z_[ztori[108]],Ws)
-# plt.xlabel('Height (m)')
-# plt.ylabel('WCT')
-# # plt.savefig('D://Lidar//plot//2022-08//BSR0805WCT.png',dpi=300,bbox_inches='tight')
 
 #calculate tau
 taucld532=np.zeros(actsize,dtype=float)
