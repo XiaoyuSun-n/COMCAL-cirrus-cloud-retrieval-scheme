@@ -13,7 +13,7 @@ The 1064nm channel is currently weaker than expected.
 
 The "comcal_daily_analysis.m" is the main program for the analysis of the lidar data. It's used for reading vertical and time resolution as the input for the data interactive process. 
 
-The "dattoaer_iterative2.m" is the basic code for the interactive process (Klett, 1985) to retrieve the optical properties from COMCAL. The LR is always interactively inspected so each day has its own 'dattoaer_iterative' code, and it can be provided by Xiaoyu Sun (xiaoyu_sun@iup.physik.uni-bremen.de).
+The "dattoaer_iterative2.m" is the basic code for the iteractive process (Klett, 1985) to retrieve the optical properties from COMCAL. The LR is always iteractively inspected so each day has its own 'dattoaer_iterative' code, and it can be provided by Xiaoyu Sun (xiaoyu_sun@iup.physik.uni-bremen.de).
 
 The "detection_of_cirrus_layers.py" is the code for the detection of the cirrus cloud base and top height by the Wavelet Covariance Transform (WCT) method Gamage and Hagelberg (1993). 
 
